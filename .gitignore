@@ -1,0 +1,17 @@
+# Generated benchmark outputs
+results/
+cross_repo_results/
+benchmark_report.csv
+BENCHMARK_ANALYSIS.md
+
+# Temp payloads/logs
+temp_*.json
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# OS/editor
+.DS_Store
+Thumbs.db

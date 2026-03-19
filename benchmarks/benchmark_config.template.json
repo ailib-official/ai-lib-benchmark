@@ -1,0 +1,21 @@
+{
+  "targetUrl": "https://api.deepseek.com/v1/chat/completions",
+  "durationSeconds": 30,
+  "connections": 5,
+  "pipelining": 1,
+  "headers": {
+    "Authorization": "Bearer ${DEEPSEEK_API_KEY}",
+    "Content-Type": "application/json"
+  },
+  "payload": {
+    "model": "deepseek-chat",
+    "messages": [
+      {
+        "role": "user",
+        "content": "What is 2+2?"
+      }
+    ],
+    "max_tokens": 100,
+    "temperature": 0.5
+  }
+}
