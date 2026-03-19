@@ -1,0 +1,29 @@
+{
+  "metadata": {
+    "name": "AI-Lib Benchmark Baseline",
+    "version": "1.0.0",
+    "date": "2026-03-19"
+  },
+  "baseline": {
+    "rust": {
+      "throughput_rps": 32.7,
+      "p99_latency_ms": 321
+    },
+    "python": {
+      "throughput_rps": 30.3,
+      "p99_latency_ms": 345
+    },
+    "typescript": {
+      "throughput_rps": 29.3,
+      "p99_latency_ms": 325
+    },
+    "go": {
+      "throughput_rps": 31.2,
+      "p99_latency_ms": 338
+    }
+  },
+  "regression_thresholds": {
+    "soft_warning": 0.05,
+    "hard_fail": 0.10
+  }
+}

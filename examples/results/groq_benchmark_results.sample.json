@@ -1,0 +1,44 @@
+[
+  {
+    "repo": "ai-lib-rust",
+    "timestamp": "2026-03-13T15:49:25+08:00",
+    "target": "https://api.groq.com/openai/v1/chat/completions",
+    "duration": 10,
+    "connections": 5,
+    "result": {
+      "requestsPerSecond": 16.5,
+      "latency": {
+        "p50": 196,
+        "p99": 1236,
+        "average": 298.5
+      },
+      "requests": {
+        "total": 165
+      },
+      "throughput": {
+        "average": 21564.6
+      }
+    }
+  },
+  {
+    "repo": "ai-lib-python",
+    "timestamp": "2026-03-13T15:50:32+08:00",
+    "target": "https://api.groq.com/openai/v1/chat/completions",
+    "duration": 10,
+    "connections": 5,
+    "result": {
+      "requestsPerSecond": 22.8,
+      "latency": {
+        "p50": 185,
+        "p99": 638,
+        "average": 218.9
+      },
+      "requests": {
+        "total": 228
+      },
+      "throughput": {
+        "average": 28713.2
+      }
+    }
+  }
+]
