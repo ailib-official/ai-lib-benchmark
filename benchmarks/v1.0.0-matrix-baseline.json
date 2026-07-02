@@ -1,0 +1,29 @@
+{
+  "matrix_version": "v1.0.0",
+  "generated": "2026-07-02",
+  "description": "Post-v1.0.0 cross-runtime benchmark baseline (BENCH-003). Pin runtimes and protocol before comparing.",
+  "pins": {
+    "ai-protocol": "v1.0.0",
+    "ai-lib-rust": "1.0.0",
+    "ai-lib-python": "1.0.0",
+    "ai-lib-ts": "1.0.0",
+    "ai-lib-go": "1.0.0",
+    "ai-protocol-mock": "1.0.1"
+  },
+  "scenarios": [
+    {
+      "id": "mock-integration-smoke",
+      "description": "Four-runtime mock integration against ai-protocol-mock @1.0.x with protocol@1.0.0 manifests",
+      "repos": ["ai-lib-rust", "ai-lib-python", "ai-lib-ts", "ai-lib-go"]
+    },
+    {
+      "id": "provider-http-latency",
+      "description": "Optional live provider latency (requires API keys); see scripts/run_benchmark.ps1",
+      "repos": ["ai-lib-benchmark"]
+    }
+  ],
+  "artifacts": {
+    "sample": "examples/results/benchmark_baseline.json",
+    "groq_sample": "examples/results/groq_benchmark_results.sample.json"
+  }
+}
