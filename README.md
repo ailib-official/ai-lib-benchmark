@@ -70,6 +70,19 @@ ai-lib-benchmark/
   results/                  # generated at runtime, ignored by git
 ```
 
+## Post-v1.0.0 matrix (BENCH-003)
+
+Cross-runtime benchmarks should pin versions before comparing results:
+
+| Component | Pin |
+|-----------|-----|
+| ai-protocol | `v1.0.0` |
+| ai-lib-rust / python / ts / go | `1.0.0` |
+| ai-protocol-mock | `1.0.1` (protocol-driven SSE) |
+
+Baseline artifact: `examples/results/v1.0.0-matrix-baseline.json`.  
+See also [POST-V1-ROADMAP](https://github.com/hiddenpath/ai-lib-plans/blob/main/active/projects/ai-protocol/POST-V1-ROADMAP.yaml) `runtime_hardening` track.
+
 ## Governance
 
 - Managed under `ai-lib-constitution` rules and `ai-lib-plans` task tracking.
