@@ -1,6 +1,6 @@
-# ai-lib-benchmark
+﻿# ai-lib-benchmark
 
-Cross-runtime benchmark toolkit for the ai-lib ecosystem.
+Benchmark toolkit for the ai-lib ecosystem (includes an honest **raw vendor HTTP** baseline; true Client-path cross-runtime runs are separate).
 
 This repository is extracted from benchmark-related work in `ailib-media` and is now the canonical place for benchmark scripts, baseline artifacts, and analysis tooling.
 
@@ -9,7 +9,8 @@ This repository is extracted from benchmark-related work in `ailib-media` and is
 - Benchmark execution scripts (PowerShell + Bash)
 - Baseline and sample result artifacts
 - Report generation and regression analysis helpers
-- Cross-runtime coverage: `ai-lib-rust`, `ai-lib-python`, `ai-lib-ts`, `ai-lib-go`
+- Raw vendor HTTP baseline via autocannon (`scripts/run_benchmark.ps1`) — **not** labeled as per-runtime Client scores ([GOV-007])
+- Planned: Client-path benchmarks that actually invoke each runtime
 
 ## Quick Start
 
@@ -35,7 +36,7 @@ npm install -g autocannon
 ### 2) Run Benchmark (Windows)
 
 ```powershell
-.\scripts\run_benchmark.ps1 -repo all -runs 1 -duration 30
+.\scripts\run_benchmark.ps1 -runs 1 -duration 30
 ```
 
 Results are written to `results/`.
@@ -70,6 +71,19 @@ ai-lib-benchmark/
   results/                  # generated at runtime, ignored by git
 ```
 
+## Post-v1.0.0 matrix (BENCH-003)
+
+Cross-runtime benchmarks should pin versions before comparing results:
+
+| Component | Pin |
+|-----------|-----|
+| ai-protocol | `v1.0.0` |
+| ai-lib-rust / python / ts / go | `1.0.0` |
+| ai-protocol-mock | `1.0.1` (protocol-driven SSE) |
+
+Baseline artifact: `benchmarks/v1.0.0-matrix-baseline.json`.  
+See also [POST-V1-ROADMAP](https://github.com/hiddenpath/ai-lib-plans/blob/main/active/projects/ai-protocol/POST-V1-ROADMAP.yaml) `runtime_hardening` track.
+
 ## Governance
 
 - Managed under `ai-lib-constitution` rules and `ai-lib-plans` task tracking.
@@ -79,3 +93,5 @@ ai-lib-benchmark/
 ## License
 
 MIT
+
+
