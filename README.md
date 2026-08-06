@@ -1,6 +1,6 @@
-# ai-lib-benchmark
+﻿# ai-lib-benchmark
 
-Cross-runtime benchmark toolkit for the ai-lib ecosystem.
+Benchmark toolkit for the ai-lib ecosystem (includes an honest **raw vendor HTTP** baseline; true Client-path cross-runtime runs are separate).
 
 This repository is extracted from benchmark-related work in `ailib-media` and is now the canonical place for benchmark scripts, baseline artifacts, and analysis tooling.
 
@@ -9,7 +9,8 @@ This repository is extracted from benchmark-related work in `ailib-media` and is
 - Benchmark execution scripts (PowerShell + Bash)
 - Baseline and sample result artifacts
 - Report generation and regression analysis helpers
-- Cross-runtime coverage: `ai-lib-rust`, `ai-lib-python`, `ai-lib-ts`, `ai-lib-go`
+- Raw vendor HTTP baseline via autocannon (`scripts/run_benchmark.ps1`) — **not** labeled as per-runtime Client scores ([GOV-007])
+- Planned: Client-path benchmarks that actually invoke each runtime
 
 ## Quick Start
 
@@ -35,7 +36,7 @@ npm install -g autocannon
 ### 2) Run Benchmark (Windows)
 
 ```powershell
-.\scripts\run_benchmark.ps1 -repo all -runs 1 -duration 30
+.\scripts\run_benchmark.ps1 -runs 1 -duration 30
 ```
 
 Results are written to `results/`.
@@ -92,3 +93,5 @@ See also [POST-V1-ROADMAP](https://github.com/hiddenpath/ai-lib-plans/blob/main/
 ## License
 
 MIT
+
+
