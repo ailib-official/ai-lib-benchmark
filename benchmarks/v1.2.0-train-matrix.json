@@ -1,0 +1,34 @@
+{
+  "matrix_version": "v1.2.0-train",
+  "generated": "2026-08-07",
+  "description": "GOV-007 post-release train pins for raw-vendor-HTTP baseline (Bench A). Not a Client-path matrix — see Phase2 Client-path harness.",
+  "harness": "raw-vendor-HTTP",
+  "harness_script": "scripts/run_benchmark.ps1",
+  "pins": {
+    "ai-protocol": "v1.2.0",
+    "ai-protocol_tip": "d61b70137ef1f7b736a8945a9105f7e766b24906",
+    "ai-lib-rust": "1.3.0",
+    "ai-lib-python": "1.2.0",
+    "ai-lib-ts": "1.2.0",
+    "ai-lib-go": "1.2.0",
+    "ai-protocol-mock": "1.0.1",
+    "ai-protocol-mock_note": "Package release deferred to Phase2; PROTO-PIN on mock main tracks v1.2.0 tip after PR #10"
+  },
+  "scenarios": [
+    {
+      "id": "mock-integration-smoke",
+      "description": "Four-runtime mock integration against ai-protocol-mock with protocol@v1.2.0 manifests",
+      "repos": ["ai-lib-rust", "ai-lib-python", "ai-lib-ts", "ai-lib-go"]
+    },
+    {
+      "id": "provider-http-latency-raw",
+      "description": "Live vendor HTTP latency via autocannon only (requires API keys); labels must stay raw-vendor-http [GOV-007]",
+      "repos": ["ai-lib-benchmark"]
+    }
+  ],
+  "artifacts": {
+    "historical_v1": "benchmarks/v1.0.0-matrix-baseline.json",
+    "sample": "examples/results/benchmark_baseline.json",
+    "groq_sample": "examples/results/groq_benchmark_results.sample.json"
+  }
+}
