@@ -40,12 +40,15 @@ def run_cmd(cmd: list[str], env: dict[str, str], cwd: Path | None = None) -> dic
     payload = None
     if stdout:
         try:
-            # last JSON object in stdout
-            start = stdout.rfind("{")
-            if start >= 0:
-                payload = json.loads(stdout[start:])
+            payload = json.loads(stdout)
         except json.JSONDecodeError:
-            payload = None
+            # Fallback: decode first JSON object in mixed stdout
+            start = stdout.find("{")
+            if start >= 0:
+                try:
+                    payload, _ = json.JSONDecoder().raw_decode(stdout[start:])
+                except json.JSONDecodeError:
+                    payload = None
     return {
         "exit_code": proc.returncode,
         "wall_ms": round(wall_ms, 2),
@@ -105,15 +108,17 @@ def main() -> int:
         )
 
     if "ts" in selected:
-        tsx = ["npx", "--yes", "tsx", str(CLIENT_PATH / "run_ts.mjs")]
+        npx = "npx.cmd" if os.name == "nt" else "npx"
+        tsx = [npx, "--yes", "tsx", str(CLIENT_PATH / "run_ts.mjs")]
         summary["runtimes"]["ai-lib-ts"] = run_cmd(tsx, env, cwd=DEFAULT_ROOTS["ts"])
 
     if "go" in selected:
+        go_bin = "go.exe" if os.name == "nt" else "go"
         go_dir = CLIENT_PATH / "run_go"
         # refresh replace to local checkout
         run_cmd(
             [
-                "go",
+                go_bin,
                 "mod",
                 "edit",
                 f"-replace=github.com/ailib-official/ai-lib-go={DEFAULT_ROOTS['go']}",
@@ -121,13 +126,14 @@ def main() -> int:
             env,
             cwd=go_dir,
         )
-        run_cmd(["go", "mod", "tidy"], env, cwd=go_dir)
-        summary["runtimes"]["ai-lib-go"] = run_cmd(["go", "run", "."], env, cwd=go_dir)
+        run_cmd([go_bin, "mod", "tidy"], env, cwd=go_dir)
+        summary["runtimes"]["ai-lib-go"] = run_cmd([go_bin, "run", "."], env, cwd=go_dir)
 
     if "rust" in selected:
+        cargo = "cargo.exe" if os.name == "nt" else "cargo"
         rust_dir = CLIENT_PATH / "run_rust"
         summary["runtimes"]["ai-lib-rust"] = run_cmd(
-            ["cargo", "run", "--quiet", "--release"],
+            [cargo, "run", "--quiet", "--release"],
             env,
             cwd=rust_dir,
         )
