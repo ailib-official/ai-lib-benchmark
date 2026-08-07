@@ -73,7 +73,7 @@ ai-lib-benchmark/
 
 ## Post-v1.0.0 matrix (BENCH-003)
 
-Cross-runtime benchmarks should pin versions before comparing results:
+Historical cross-runtime pin table (Wave-5 / BENCH-003):
 
 | Component | Pin |
 |-----------|-----|
@@ -81,14 +81,28 @@ Cross-runtime benchmarks should pin versions before comparing results:
 | ai-lib-rust / python / ts / go | `1.0.0` |
 | ai-protocol-mock | `1.0.1` (protocol-driven SSE) |
 
-Baseline artifact: `benchmarks/v1.0.0-matrix-baseline.json`.  
-See also [POST-V1-ROADMAP](https://github.com/hiddenpath/ai-lib-plans/blob/main/active/projects/ai-protocol/POST-V1-ROADMAP.yaml) `runtime_hardening` track.
+Baseline artifact: `benchmarks/v1.0.0-matrix-baseline.json`.
+
+## GOV-007 release-train matrix (Bench A)
+
+Current train pins for **raw-vendor-HTTP** baseline only (not Client-path scores):
+
+| Component | Pin |
+|-----------|-----|
+| ai-protocol | `v1.2.0` (`d61b701…`) |
+| ai-lib-rust | `1.3.0` |
+| ai-lib-python / ts / go | `1.2.0` |
+| ai-protocol-mock | `1.0.1` package; PROTO-PIN → protocol v1.2.0 tip |
+
+Matrix artifact: `benchmarks/v1.2.0-train-matrix.json`.  
+Harness: `scripts/run_benchmark.ps1` ([GOV-007] results labeled `raw-vendor-http` only).
 
 ## Governance
 
 - Managed under `ai-lib-constitution` rules and `ai-lib-plans` task tracking.
 - Cross-runtime behavior must remain consistent with `[ARCH-003]`.
 - Benchmark execution and baseline update should be reproducible and traceable.
+- Do not label raw HTTP harness output as ai-lib Client / runtime performance (`GOV-007`).
 
 ## License
 
