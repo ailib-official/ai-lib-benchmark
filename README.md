@@ -10,7 +10,7 @@ This repository is extracted from benchmark-related work in `ailib-media` and is
 - Baseline and sample result artifacts
 - Report generation and regression analysis helpers
 - Raw vendor HTTP baseline via autocannon (`scripts/run_benchmark.ps1`) — **not** labeled as per-runtime Client scores ([GOV-007])
-- Planned: Client-path benchmarks that actually invoke each runtime
+- Client-path benchmarks via `scripts/run_client_path_benchmark.py` (AiClient/Client against mock; label `client-path-mock`)
 
 ## Quick Start
 
@@ -83,19 +83,30 @@ Historical cross-runtime pin table (Wave-5 / BENCH-003):
 
 Baseline artifact: `benchmarks/v1.0.0-matrix-baseline.json`.
 
-## GOV-007 release-train matrix (Bench A)
+## GOV-007 release-train matrix (Bench A + Bench B)
 
-Current train pins for **raw-vendor-HTTP** baseline only (not Client-path scores):
+Train pins:
 
 | Component | Pin |
 |-----------|-----|
 | ai-protocol | `v1.2.0` (`d61b701…`) |
 | ai-lib-rust | `1.3.0` |
 | ai-lib-python / ts / go | `1.2.0` |
-| ai-protocol-mock | `1.0.1` package; PROTO-PIN → protocol v1.2.0 tip |
+| ai-protocol-mock | `1.1.0` |
 
-Matrix artifact: `benchmarks/v1.2.0-train-matrix.json`.  
-Harness: `scripts/run_benchmark.ps1` ([GOV-007] results labeled `raw-vendor-http` only).
+Matrix artifact: `benchmarks/v1.2.0-train-matrix.json`.
+
+| Harness | Script | Result label |
+|---------|--------|--------------|
+| Bench A raw vendor HTTP | `scripts/run_benchmark.ps1` | `raw-vendor-http` only |
+| Bench B Client-path (mock) | `scripts/run_client_path_benchmark.py` | `client-path-mock` only |
+
+```powershell
+$env:MOCK_HTTP_URL = "http://127.0.0.1:4010"
+python scripts/run_client_path_benchmark.py --samples 5
+```
+
+Requires sibling checkouts (or `AI_LIB_*_ROOT` env) and a running mock server.
 
 ## Governance
 

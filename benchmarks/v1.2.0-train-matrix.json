@@ -1,9 +1,11 @@
 {
   "matrix_version": "v1.2.0-train",
-  "generated": "2026-08-07",
-  "description": "GOV-007 post-release train pins for raw-vendor-HTTP baseline (Bench A). Not a Client-path matrix — see Phase2 Client-path harness.",
-  "harness": "raw-vendor-HTTP",
-  "harness_script": "scripts/run_benchmark.ps1",
+  "generated": "2026-08-08",
+  "description": "GOV-007 post-release train pins. Bench A = raw-vendor-HTTP; Bench B = client-path-mock.",
+  "harness_raw": "raw-vendor-HTTP",
+  "harness_raw_script": "scripts/run_benchmark.ps1",
+  "harness_client": "client-path-mock",
+  "harness_client_script": "scripts/run_client_path_benchmark.py",
   "pins": {
     "ai-protocol": "v1.2.0",
     "ai-protocol_tip": "d61b70137ef1f7b736a8945a9105f7e766b24906",
@@ -11,19 +13,23 @@
     "ai-lib-python": "1.2.0",
     "ai-lib-ts": "1.2.0",
     "ai-lib-go": "1.2.0",
-    "ai-protocol-mock": "1.0.1",
-    "ai-protocol-mock_note": "Package release deferred to Phase2; PROTO-PIN on mock main tracks v1.2.0 tip after PR #10"
+    "ai-protocol-mock": "1.1.0"
   },
   "scenarios": [
     {
       "id": "mock-integration-smoke",
-      "description": "Four-runtime mock integration against ai-protocol-mock with protocol@v1.2.0 manifests",
+      "description": "Four-runtime mock integration against ai-protocol-mock@1.1.0 with protocol@v1.2.0 manifests",
       "repos": ["ai-lib-rust", "ai-lib-python", "ai-lib-ts", "ai-lib-go"]
     },
     {
       "id": "provider-http-latency-raw",
-      "description": "Live vendor HTTP latency via autocannon only (requires API keys); labels must stay raw-vendor-http [GOV-007]",
+      "description": "Live vendor HTTP latency (requires API keys); labels must stay raw-vendor-http [GOV-007]",
       "repos": ["ai-lib-benchmark"]
+    },
+    {
+      "id": "client-path-mock-latency",
+      "description": "Cross-runtime AiClient/Client chat latency against mock; labels must stay client-path-mock [GOV-007]",
+      "repos": ["ai-lib-benchmark", "ai-lib-rust", "ai-lib-python", "ai-lib-ts", "ai-lib-go"]
     }
   ],
   "artifacts": {

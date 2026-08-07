@@ -1,0 +1,10 @@
+[package]
+name = "client-path-rust-runner"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[dependencies]
+ai-lib-rust = { path = "../../../../ai-lib-rust/crates/ai-lib-rust" }
+serde_json = "1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros"] }

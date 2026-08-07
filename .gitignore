@@ -18,3 +18,7 @@ Thumbs.db
 
 # Internal agent workspace files
 .cursor/
+
+# Client-path runner build artifacts
+scripts/client_path/run_rust/target/
+scripts/client_path/run_go/go.sum
